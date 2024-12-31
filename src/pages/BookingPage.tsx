@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Calendar, Clock, Languages } from 'lucide-react';
 import { useBookingStore } from '../stores/bookingStore';
@@ -30,7 +30,6 @@ const BookingPage = () => {
     try {
       await createNewBooking({
         ...data,
-        pujaId: data.pujaId,
         userId: '', // Will be set by RLS
       });
     } catch (err) {
