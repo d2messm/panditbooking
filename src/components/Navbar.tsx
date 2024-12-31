@@ -17,6 +17,10 @@ const Navbar = () => {
               <Link to="/book" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">Book Puja</Link>
               <Link to="/about" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">About</Link>
               <Link to="/contact" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">Contact</Link>
+              <Link to="/profile" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">Profile</Link>
+              <Link to="/services" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">Services</Link>
+              <Link to="/payment" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">Payment</Link>
+              <Link to="/payment-info" className="px-3 py-2 rounded-md text-sm font-medium hover:bg-orange-500">Payment Info</Link>
               {user ? (
                 <button 
                   onClick={() => signOut()}

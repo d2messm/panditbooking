@@ -30,6 +30,7 @@ const BookingPage = () => {
     try {
       await createNewBooking({
         ...data,
+        pujaId: data.pujaId,
         userId: '', // Will be set by RLS
       });
     } catch (err) {

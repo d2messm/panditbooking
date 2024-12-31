@@ -8,6 +8,10 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import BookingPage from './pages/BookingPage';
+import ProfilePage from './pages/ProfilePage';
+import ServicesPage from './pages/ServicesPage';
+import PaymentPage from './pages/PaymentPage';
+import PaymentInfoPage from './pages/PaymentInfoPage';
 
 function HomePage() {
   return (
@@ -36,6 +40,10 @@ function App() {
               </ProtectedRoute>
             } 
           />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment-info" element={<PaymentInfoPage />} />
         </Routes>
       </Layout>
     </Router>
