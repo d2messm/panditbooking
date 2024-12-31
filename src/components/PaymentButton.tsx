@@ -1,34 +1,21 @@
-const PaymentButton = ({ amount }: { amount: number }) => {
-  const handlePayment = () => {
-    const options = {
-      key: 'rzp_test_jZ32qSyReR6ZWE', // Replace with your Razorpay key ID
-      amount: amount * 100, // Amount in paise
-      currency: 'INR',
-      name: 'Your Company Name',
-      description: 'Test Transaction',
-      handler: function (response: any) {
-        alert(`Payment successful! Payment ID: ${response.razorpay_payment_id}`);
-      },
-      prefill: {
-        name: 'Your Name',
-        email: 'email@example.com',
-        contact: '9999999999',
-      },
-      notes: {
-        address: 'Corporate Office',
-      },
-      theme: {
-        color: '#F37254',
-      },
-    };
+import { useNavigate } from 'react-router-dom';
 
-    const rzp = new (window as any).Razorpay(options);
-    rzp.open();
+const PaymentButton = ({ amount }: { amount: number }) => {
+  const navigate = useNavigate();
+
+  const handleBooking = () => {
+    // Navigate to the booking flow with the selected service
+    navigate(`/booking/package-selection`, { 
+      state: { amount } 
+    });
   };
 
   return (
-    <button onClick={handlePayment} className="bg-orange-600 text-white py-2 px-4 rounded-md">
-      Pay Now
+    <button
+      onClick={handleBooking}
+      className="bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition-colors"
+    >
+      Book Now
     </button>
   );
 };

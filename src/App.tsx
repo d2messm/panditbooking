@@ -12,6 +12,8 @@ import ProfilePage from './pages/ProfilePage';
 import ServicesPage from './pages/ServicesPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentInfoPage from './pages/PaymentInfoPage';
+import BookingFlowPage from './pages/BookingFlowPage';
+import PujaDetailPage from './pages/PujaDetailPage';
 
 function HomePage() {
   return (
@@ -44,6 +46,8 @@ function App() {
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/payment" element={<PaymentPage />} />
           <Route path="/payment-info" element={<PaymentInfoPage />} />
+          <Route path="/booking/:step" element={<BookingFlowPage />} />
+          <Route path="/puja/:id" element={<PujaDetailPage />} />
         </Routes>
       </Layout>
     </Router>
