@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  @apply bg-white;
-}
-
 #root {
-  @apply min-h-screen bg-white;
+  min-height: 100vh;
+  background-color: white;
 }

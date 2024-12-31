@@ -1,4 +1,3 @@
-import React from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 

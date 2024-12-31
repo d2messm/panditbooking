@@ -1,10 +1,7 @@
-import React from 'react';
-import { Menu, X, BookOpen } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
   const navigate = useNavigate();
   const { user, signOut } = useAuth();
 

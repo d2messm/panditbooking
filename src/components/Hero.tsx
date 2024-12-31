@@ -1,4 +1,3 @@
-import React from 'react';
 import { Calendar, Users, Clock } from 'lucide-react';
 
 const Hero = () => {
