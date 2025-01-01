@@ -1,45 +1,76 @@
 import { create } from 'zustand';
-import type { BookingDetails, Package, TimeSlot } from '../types/booking';
+import type { BookingDetails } from '../types/booking';
 
 interface BookingFlowState {
   bookingDetails: BookingDetails;
-  setPackage: (pkg: Package) => void;
+  amount: number;
+  setAmount: (amount: number) => void;
+  setPuja: (pujaId: string) => void;
   setDate: (date: string) => void;
-  setTimeSlot: (slot: TimeSlot) => void;
+  setTime: (time: string) => void;
+  setLanguage: (language: string) => void;
+  setSpecialRequirements: (requirements: string) => void;
   setAddress: (address: string) => void;
-  setInstructions: (instructions: string) => void;
+  setCity: (city: string) => void;
+  setState: (state: string) => void;
+  setPincode: (pincode: string) => void;
   resetBooking: () => void;
 }
 
 const initialState: BookingDetails = {
-  package: null,
-  date: null,
-  timeSlot: null,
+  puja_id: null,
+  booking_date: null,
+  booking_time: null,
+  language: '',
+  special_requirements: '',
   address: '',
-  instructions: '',
+  city: '',
+  state: '',
+  pincode: '',
+  status: 'pending'
 };
 
 export const useBookingFlowStore = create<BookingFlowState>((set) => ({
   bookingDetails: initialState,
-  setPackage: (pkg) => 
+  amount: 0,
+  setAmount: (amount) => set({ amount }),
+  setPuja: (pujaId) => {
+    if (!pujaId) return;
     set((state) => ({ 
-      bookingDetails: { ...state.bookingDetails, package: pkg } 
-    })),
+      bookingDetails: { ...state.bookingDetails, puja_id: pujaId } 
+    }));
+  },
   setDate: (date) =>
     set((state) => ({
-      bookingDetails: { ...state.bookingDetails, date }
+      bookingDetails: { ...state.bookingDetails, booking_date: date }
     })),
-  setTimeSlot: (slot) =>
+  setTime: (time) =>
     set((state) => ({
-      bookingDetails: { ...state.bookingDetails, timeSlot: slot }
+      bookingDetails: { ...state.bookingDetails, booking_time: time }
+    })),
+  setLanguage: (language) =>
+    set((state) => ({
+      bookingDetails: { ...state.bookingDetails, language }
+    })),
+  setSpecialRequirements: (requirements) =>
+    set((state) => ({
+      bookingDetails: { ...state.bookingDetails, special_requirements: requirements }
     })),
   setAddress: (address) =>
     set((state) => ({
       bookingDetails: { ...state.bookingDetails, address }
     })),
-  setInstructions: (instructions) =>
+  setCity: (city) =>
     set((state) => ({
-      bookingDetails: { ...state.bookingDetails, instructions }
+      bookingDetails: { ...state.bookingDetails, city }
+    })),
+  setState: (state) =>
+    set((prev) => ({
+      bookingDetails: { ...prev.bookingDetails, state }
+    })),
+  setPincode: (pincode) =>
+    set((state) => ({
+      bookingDetails: { ...state.bookingDetails, pincode }
     })),
   resetBooking: () => set({ bookingDetails: initialState }),
 })); 

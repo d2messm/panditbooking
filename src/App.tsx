@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Hero from './components/Hero';
 import PujaList from './components/PujaList';
@@ -7,13 +7,15 @@ import SignupForm from './components/auth/SignupForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
-import BookingPage from './pages/BookingPage';
+// import BookingPage from './pages/BookingPage';
 import ProfilePage from './pages/ProfilePage';
 import ServicesPage from './pages/ServicesPage';
 import PaymentPage from './pages/PaymentPage';
 import PaymentInfoPage from './pages/PaymentInfoPage';
 import BookingFlowPage from './pages/BookingFlowPage';
 import PujaDetailPage from './pages/PujaDetailPage';
+import BookingPuja from './pages/BookingPuja';
+import { useBookingFlowStore } from './stores/bookingFlowStore';
 
 function HomePage() {
   return (
@@ -23,6 +25,17 @@ function HomePage() {
     </div>
   );
 }
+
+// Create a protected route component
+const ProtectedBookingRoute = () => {
+  const { bookingDetails } = useBookingFlowStore();
+  
+  if (!bookingDetails.puja_id) {
+    return <Navigate to="/services" replace />;
+  }
+  
+  return <BookingFlowPage />;
+};
 
 function App() {
   return (
@@ -35,10 +48,18 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route 
+            path="/booking-puja/:id" 
+            element={
+              <ProtectedRoute>
+                <BookingPuja />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
             path="/book" 
             element={
               <ProtectedRoute>
-                <BookingPage />
+                <ProtectedBookingRoute />
               </ProtectedRoute>
             } 
           />

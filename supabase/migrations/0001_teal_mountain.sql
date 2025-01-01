@@ -36,3 +36,22 @@ CREATE POLICY "Users can update own profile"
   TO authenticated
   USING (auth.uid() = id)
   WITH CHECK (auth.uid() = id);
+
+create table public.users (
+  id uuid references auth.users(id) primary key,
+  name text,
+  email text,
+  phone text,
+  created_at timestamp with time zone default timezone('utc'::text, now()),
+  updated_at timestamp with time zone default timezone('utc'::text, now())
+);
+
+alter table public.users enable row level security;
+
+create policy "Users can view their own profile" 
+  on users for select 
+  using (auth.uid() = id);
+
+create policy "Users can update their own profile" 
+  on users for update 
+  using (auth.uid() = id);

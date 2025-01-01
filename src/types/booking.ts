@@ -13,9 +13,14 @@ export interface TimeSlot {
 }
 
 export interface BookingDetails {
-  package: Package | null;
-  date: string | null;
-  timeSlot: TimeSlot | null;
+  puja_id: string | null;
+  booking_date: string | null;
+  booking_time: string | null;
+  language: string;
+  special_requirements: string;
   address: string;
-  instructions: string;
+  city: string;
+  state: string;
+  pincode: string;
+  status?: 'pending' | 'confirmed' | 'completed' | 'cancelled';
 } 

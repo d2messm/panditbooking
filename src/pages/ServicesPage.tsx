@@ -9,6 +9,10 @@ const ServicesPage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -22,7 +26,7 @@ const ServicesPage = () => {
       {/* Category Slider */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h2 className="text-2xl font-semibold mb-6">Categories</h2>
-        <CategorySlider />
+        <CategorySlider onCategoryChange={handleCategoryChange} />
       </div>
 
       {/* Search and Filters */}
@@ -59,7 +63,7 @@ const ServicesPage = () => {
               <div>
                 <h3 className="font-medium mb-2">Deities</h3>
                 <div className="space-y-2">
-                  {filters.deities.map((deity) => (
+                  {filters.deities?.map((deity) => (
                     <label key={deity} className="flex items-center">
                       <input type="checkbox" className="rounded text-orange-600" />
                       <span className="ml-2 text-sm">{deity}</span>
@@ -72,7 +76,7 @@ const ServicesPage = () => {
               <div>
                 <h3 className="font-medium mb-2">Price Range</h3>
                 <div className="space-y-2">
-                  {filters.priceRanges.map((range) => (
+                  {filters.priceRanges?.map((range) => (
                     <label key={range.id} className="flex items-center">
                       <input type="checkbox" className="rounded text-orange-600" />
                       <span className="ml-2 text-sm">{range.label}</span>
@@ -85,7 +89,7 @@ const ServicesPage = () => {
               <div>
                 <h3 className="font-medium mb-2">Language</h3>
                 <div className="space-y-2">
-                  {filters.languages.map((language) => (
+                  {filters.languages?.map((language) => (
                     <label key={language} className="flex items-center">
                       <input type="checkbox" className="rounded text-orange-600" />
                       <span className="ml-2 text-sm">{language}</span>
@@ -98,7 +102,7 @@ const ServicesPage = () => {
               <div>
                 <h3 className="font-medium mb-2">Location</h3>
                 <div className="space-y-2">
-                  {filters.locations.map((location) => (
+                  {filters.locations?.map((location) => (
                     <label key={location} className="flex items-center">
                       <input type="checkbox" className="rounded text-orange-600" />
                       <span className="ml-2 text-sm">{location}</span>
@@ -114,8 +118,10 @@ const ServicesPage = () => {
       {/* Services Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categories.map((category) =>
-            category.services.map((service) => (
+          {categories
+            .filter((category) => selectedCategory === 'all' || category.id === selectedCategory)
+            .flatMap((category) => category.services || [])
+            .map((service) => (
               <Link
                 key={service.id}
                 to={`/puja/${service.id}`}
@@ -138,12 +144,11 @@ const ServicesPage = () => {
                   </div>
                 </div>
               </Link>
-            ))
-          )}
+            ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default ServicesPage; 
+export default ServicesPage;

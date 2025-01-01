@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { Star, Clock, MapPin, Calendar, Check, Info } from 'lucide-react';
 import PaymentButton from '../components/PaymentButton';
+import { useNavigate } from 'react-router-dom';
+import { useBookingFlowStore } from '../stores/bookingFlowStore';
 
 const PujaDetailPage = () => {
   const [selectedTab, setSelectedTab] = useState('description');
+  const navigate = useNavigate();
+  const { setPuja, setAmount } = useBookingFlowStore();
 
   const pujaDetails = {
     name: "Dhanvantri Havan",
@@ -39,6 +43,12 @@ const PujaDetailPage = () => {
       "Aarti",
       "Prasad Distribution"
     ]
+  };
+
+  const handleBookNow = () => {
+    setPuja(pujaDetails.id);
+    setAmount(pujaDetails.price);
+    navigate(`/booking-puja/${pujaDetails.id}`);
   };
 
   return (
