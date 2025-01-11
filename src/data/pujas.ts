@@ -21,6 +21,6 @@ export const pujas = [
     description: 'Auspicious puja for prosperity and well-being',
     duration: '2-3 hours',
     price: 3100,
-    image: 'https://images.unsplash.com/photo-1623656607289-720b258e7daa?auto=format&fit=crop&q=80&w=800'
+    image: 'images/satyanarayan.png'
   }
 ];
