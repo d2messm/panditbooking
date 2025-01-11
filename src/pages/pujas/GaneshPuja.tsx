@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Star, Clock, MapPin, Calendar, Check, Info } from 'lucide-react';
+import { Star, Clock, MapPin, Check, Info } from 'lucide-react';
 import PaymentButton from '../../components/PaymentButton';
 import BookingForm from '../../components/BookingForm';
 import { getPujaById } from '../../data/pujas';
@@ -88,7 +88,7 @@ const GaneshPuja = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Benefits</h3>
                     <ul className="space-y-2">
-                      {pujaDetails.benefits.map((benefit, index) => (
+                      {pujaDetails.benefits?.map((benefit, index) => (
                         <li key={index} className="flex items-start">
                           <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
                           <span className="text-gray-600">{benefit}</span>
@@ -102,7 +102,7 @@ const GaneshPuja = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Puja Items Included</h3>
                     <ul className="grid grid-cols-2 gap-4">
-                      {pujaDetails.items.map((item, index) => (
+                      {pujaDetails.items?.map((item, index) => (
                         <li key={index} className="flex items-center">
                           <span className="w-2 h-2 bg-orange-600 rounded-full mr-2"></span>
                           <span className="text-gray-600">{item}</span>
@@ -116,7 +116,7 @@ const GaneshPuja = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Puja Process</h3>
                     <div className="space-y-4">
-                      {pujaDetails.process.map((step, index) => (
+                      {pujaDetails.process?.map((step, index) => (
                         <div key={index} className="flex items-start">
                           <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-semibold text-sm">
                             {index + 1}

@@ -1,4 +1,3 @@
-import React from 'react';
 import PujaCard from './PujaCard';
 import { pujas } from '../data/pujas';
 

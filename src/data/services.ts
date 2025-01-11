@@ -1,10 +1,12 @@
-const BASE_IMAGE_PATH = 'https://images.unsplash.com';
+// const BASE_IMAGE_PATH = 'https://images.unsplash.com';
+
+export const FALLBACK_IMAGE = '/images/puja-default.jpg';
 
 export const categories = [
   {
     id: 'shanti-pujas',
     name: 'Shanti Pujas',
-    image: `${BASE_IMAGE_PATH}/photo-1581337776066-5a0c60c9dc9a`,
+    image: 'images/puja.jpeg',
     services: [
       {
         id: 'graha-shanti',
@@ -14,7 +16,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 50,
-        image: `${BASE_IMAGE_PATH}/photo-1583275479278-7b7cd5fee191`
+        image: 'images/graha-shanti.jpg'
       },
       {
         id: 'navagraha-shanti',
@@ -24,7 +26,7 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.8,
         reviews: 45,
-        image: `${BASE_IMAGE_PATH}/photo-1583321500900-82807e458f3c`
+        image: 'images/nagraha-shanti.png'
       },
       {
         id: 'kalsarp-dosh',
@@ -34,7 +36,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 60,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: 'images/kaal-sarp.png'
       },
       {
         id: 'mangal-dosh',
@@ -44,7 +46,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.7,
         reviews: 35,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: 'images/mangl-dosh.png'
       },
       {
         id: 'pitru-dosh',
@@ -54,14 +56,14 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 42,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: 'images/pitra-dosh.png'
       }
     ]
   },
   {
     id: 'pitru-puja',
     name: 'Pitru Puja',
-    image: `${BASE_IMAGE_PATH}/photo-1583321500900-82807e458f3c`,
+    image: '/images/pitra.jpg',
     services: [
       {
         id: 'pind-daan',
@@ -71,7 +73,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 55,
-        image: `${BASE_IMAGE_PATH}/photo-1583275479278-7b7cd5fee191`
+        image: `/images/puja.png`
       },
       {
         id: 'shraadh',
@@ -81,7 +83,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 40,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/shraadh.png`
       },
       {
         id: 'tarpan',
@@ -91,14 +93,14 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.7,
         reviews: 38,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/tarpan.png`
       }
     ]
   },
   {
     id: 'pujas',
     name: 'Pujas',
-    image: 'https://images.unsplash.com/photo-1542124292-70177e239a3b',
+    image: `/images/puja.jpeg`,
     services: [
       {
         id: 'satyanarayan',
@@ -108,7 +110,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 75,
-        image: 'https://images.unsplash.com/photo-1617926247627-6d2894608e69'
+        image: `/images/satyanarayan.png`
       },
       {
         id: 'ganesh',
@@ -118,7 +120,7 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.8,
         reviews: 65,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/ganesh.png`
       },
       {
         id: 'lakshmi',
@@ -128,14 +130,14 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.9,
         reviews: 70,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/lakshmi.png`
       }
     ]
   },
   {
     id: 'havans',
     name: 'Havans',
-    image: 'https://images.unsplash.com/photo-1604608678051-64d46d8d8d8e',
+    image: '/images/hawan.jpeg',
     services: [
       {
         id: 'rudrabhishek',
@@ -145,7 +147,7 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.9,
         reviews: 48,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/rudrabhishek.png`
       },
       {
         id: 'maha-mrityunjaya',
@@ -155,14 +157,14 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 52,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/maha-mrityunjaya.png`
       }
     ]
   },
   {
     id: 'jaaps',
     name: 'Jaaps',
-    image: 'https://images.unsplash.com/photo-1618334940835-999944dcdd5e',
+    image: `/images/jaaps.png`,
     services: [
       {
         id: 'gayatri',
@@ -172,7 +174,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.7,
         reviews: 45,
-        image: 'https://images.unsplash.com/photo-1618334940835-999944dcdd5e'
+        image: `/images/gayatri.png`
       },
       {
         id: 'mahamrityunjaya',
@@ -182,14 +184,14 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 40,
-        image: 'https://images.unsplash.com/photo-1618334940835-999944dcdd5e'
+        image: `/images/mahamrityunjaya.png`
       }
     ]
   },
   {
     id: 'paths',
     name: 'Paths',
-    image: 'jannesjacobsnfsb3jpvlcmunsplash.jpg',
+    image: `/images/paths.png`,
     services: [
       {
         id: 'sunderkand',
@@ -199,7 +201,7 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.9,
         reviews: 65,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/sunderkand.png`
       },
       {
         id: 'hanuman-chalisa',
@@ -209,14 +211,14 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.8,
         reviews: 58,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/hanuman-chalisa.png`
       }
     ]
   },
   {
     id: 'bhajans-chowki',
     name: 'Bhajans & Chowki',
-    image: 'reducedmaatakichowki.JPG',
+    image: `/images/bhajans-chowki.png`,
     services: [
       {
         id: 'mata-ki-chowki',
@@ -226,7 +228,7 @@ export const categories = [
         duration: '4-5 hours',
         rating: 4.9,
         reviews: 72,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/mata-ki-chowki.png`
       },
       {
         id: 'bhajan-sandhya',
@@ -236,14 +238,14 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.8,
         reviews: 65,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/bhajan-sandhya.png`
       }
     ]
   },
   {
     id: 'festival-pooja',
     name: 'Festival Pooja',
-    image: 'reducedganeshapratisstapana.jpg',
+    image: `/images/festival-pooja.png`,
     services: [
       {
         id: 'diwali-puja',
@@ -253,7 +255,7 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.9,
         reviews: 85,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/diwali-puja.png`
       },
       {
         id: 'ganesh-chaturthi',
@@ -263,7 +265,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 78,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/ganesh-chaturthi.png`
       },
       {
         id: 'navratri-puja',
@@ -273,7 +275,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 82,
-        image: 'https://images.unsplash.com/photo-1609941767545-c3705e1e6b11'
+        image: `/images/navratri-puja.png`
       }
     ]
   }
@@ -310,4 +312,4 @@ export const filters = {
 
 export const getOptimizedImage = (url: string) => `${url}?auto=format&fit=crop&w=800&q=80`;
 
-export const FALLBACK_IMAGE = `${BASE_IMAGE_PATH}/photo-1542124292-70177e239a3b?auto=format&fit=crop&w=800&q=80`; 
+// export const FALLBACK_IMAGE = `${BASE_IMAGE_PATH}/photo-1542124292-70177e239a3b?auto=format&fit=crop&w=800&q=80`; 

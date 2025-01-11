@@ -1,4 +1,3 @@
-import React from 'react';
 import { pujas } from '../data/pujas';
 
 const FeaturedPujas = () => {

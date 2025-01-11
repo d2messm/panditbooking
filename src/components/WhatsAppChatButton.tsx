@@ -1,4 +1,3 @@
-import React from 'react';
 
 const WhatsAppChatButton = () => {
   const phoneNumber = '1234567890'; // Replace with your WhatsApp number

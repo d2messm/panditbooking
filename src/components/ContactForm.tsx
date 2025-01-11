@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Handle form submission logic
     console.log('Form submitted:', formData);
@@ -49,7 +49,7 @@ const ContactForm = () => {
             value={formData.message}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
-            rows="4"
+            rows={4}
             required
           />
         </div>

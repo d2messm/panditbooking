@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
-import { Star, Clock, MapPin, Calendar, Check, Info } from 'lucide-react';
+import { Star, Clock, MapPin, Calendar, Info } from 'lucide-react';
 import { categories } from '../data/services';
 import PaymentButton from '../components/PaymentButton';
 
@@ -40,6 +40,10 @@ const ServiceDetailPage = () => {
                 <div className="flex items-center">
                   <MapPin className="h-5 w-5 mr-2" />
                   <span>Available in all locations</span>
+                </div>
+                <div className="flex items-center">
+                  <Calendar className="h-5 w-5 mr-2" />
+                  <span>Available on all days</span>
                 </div>
               </div>
             </div>

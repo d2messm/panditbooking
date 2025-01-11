@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PaymentButton from '../../components/PaymentButton';
 
 const SatyanarayanPuja = () => {
-  const [selectedTab] = useState('description');
+  const [selectedTab, setSelectedTab] = useState('description');
 
   const pujaDetails = {
     name: "Satyanarayan Puja",
@@ -39,10 +39,21 @@ const SatyanarayanPuja = () => {
     ]
   };
 
-  // Copy the same JSX structure from GaneshPuja
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Copy the entire JSX structure from GaneshPuja */}
+      <div className="tabs">
+        <button onClick={() => setSelectedTab('description')}>Description</button>
+        <button onClick={() => setSelectedTab('benefits')}>Benefits</button>
+        <button onClick={() => setSelectedTab('items')}>Items</button>
+        <button onClick={() => setSelectedTab('process')}>Process</button>
+      </div>
+      <div>
+        {selectedTab === 'description' && <p>{pujaDetails.description}</p>}
+        {selectedTab === 'benefits' && <ul>{pujaDetails.benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}</ul>}
+        {selectedTab === 'items' && <ul>{pujaDetails.items.map((item) => <li key={item}>{item}</li>)}</ul>}
+        {selectedTab === 'process' && <ul>{pujaDetails.process.map((step) => <li key={step}>{step}</li>)}</ul>}
+      </div>
+      <PaymentButton amount={pujaDetails.price} />
     </div>
   );
 };

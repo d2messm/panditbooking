@@ -1,4 +1,4 @@
-import { getOptimizedImage, FALLBACK_IMAGE } from '../data/services';
+import { getImagePath } from '../utils/imageUtils';
 import { Star } from 'lucide-react';
 
 interface ServiceCardProps {
@@ -15,13 +15,17 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  const fallbackImage = '/images/puja-default.jpg';
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    e.currentTarget.src = fallbackImage;
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
       <img 
-        src={getOptimizedImage(service.image)} 
-        onError={(e) => {
-          e.currentTarget.src = FALLBACK_IMAGE;
-        }}
+        src={getImagePath(service.image)}
+        onError={handleImageError}
         alt={service.name}
         loading="lazy"
         className="w-full h-48 object-cover rounded-t-lg"

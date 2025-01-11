@@ -5,7 +5,24 @@ export const pujas = [
     description: 'Traditional puja ceremony for engagement celebrations',
     duration: '2-3 hours',
     price: 5100,
-    image: 'https://images.unsplash.com/photo-1604608672516-f1b9b1d37076?auto=format&fit=crop&q=80&w=800'
+    image: 'https://images.unsplash.com/photo-1604608672516-f1b9b1d37076?auto=format&fit=crop&q=80&w=800',
+    rating: 4.8,
+    reviews: 45,
+    benefits: [
+      'Brings harmony',
+      'Blesses the couple',
+      'Ensures successful marriage'
+    ],
+    items: [
+      'Flowers',
+      'Fruits',
+      'Sweets'
+    ],
+    process: [
+      'Initial prayers',
+      'Main ceremony',
+      'Blessings'
+    ]
   },
   {
     id: '2',
@@ -24,3 +41,7 @@ export const pujas = [
     image: 'images/satyanarayan.png'
   }
 ];
+
+export const getPujaById = (id: string) => {
+  return pujas.find(puja => puja.id === id);
+};

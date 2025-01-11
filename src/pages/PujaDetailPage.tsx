@@ -10,6 +10,7 @@ const PujaDetailPage = () => {
   const { setPuja, setAmount } = useBookingFlowStore();
 
   const pujaDetails = {
+    id: "dhanvantri-havan",
     name: "Dhanvantri Havan",
     rating: 4.9,
     reviews: 50,
@@ -42,7 +43,8 @@ const PujaDetailPage = () => {
       "Purnahuti",
       "Aarti",
       "Prasad Distribution"
-    ]
+    ],
+    image: "/images/festival.jpeg"
   };
 
   const handleBookNow = () => {
@@ -86,9 +88,9 @@ const PujaDetailPage = () => {
             {/* Right Column - Image */}
             <div className="rounded-lg overflow-hidden shadow-lg">
               <img
-                src="https://source.unsplash.com/800x600/?hindu,puja,havan"
+                src={pujaDetails.image}
                 alt={pujaDetails.name}
-                className="w-full h-64 object-cover"
+                className="w-full h-48 object-cover"
               />
             </div>
           </div>
@@ -195,6 +197,13 @@ const PujaDetailPage = () => {
               </div>
 
               <PaymentButton amount={pujaDetails.price} />
+
+              <button 
+                onClick={handleBookNow} 
+                className="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition"
+              >
+                Book Now
+              </button>
 
               <p className="mt-4 text-sm text-gray-500 text-center">
                 100% Satisfaction Guaranteed
