@@ -1,12 +1,12 @@
-// const BASE_IMAGE_PATH = 'https://images.unsplash.com';
+const BASE_IMAGE_PATH = 'https://poojaimages.s3.ap-south-1.amazonaws.com';
 
-export const FALLBACK_IMAGE = '/images/puja-default.jpg';
+export const FALLBACK_IMAGE = '${BASE_IMAGE_PATH}/puja-default.jpg';
 
 export const categories = [
   {
     id: 'shanti-pujas',
     name: 'Shanti Pujas',
-    image: 'images/puja.jpeg',
+    image: `${BASE_IMAGE_PATH}/puja.jpeg`,
     services: [
       {
         id: 'graha-shanti',
@@ -16,7 +16,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 50,
-        image: 'images/grah-shanti.png'
+        image: `${BASE_IMAGE_PATH}/grah-shanti.png`
       },
       {
         id: 'navagraha-shanti',
@@ -26,7 +26,7 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.8,
         reviews: 45,
-        image: 'images/nagraha-shanti.png'
+        image: `${BASE_IMAGE_PATH}/nagraha-shanti.png`
       },
       {
         id: 'kalsarp-dosh',
@@ -36,7 +36,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 60,
-        image: 'images/kaal-sarp.png'
+        image: `${BASE_IMAGE_PATH}/kaal-sarp.png`
       },
       {
         id: 'mangal-dosh',
@@ -46,7 +46,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.7,
         reviews: 35,
-        image: 'images/mangl-dosh.png'
+        image: `${BASE_IMAGE_PATH}/mangl-dosh.png`
       },
       {
         id: 'pitru-dosh',
@@ -56,14 +56,14 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 42,
-        image: 'images/pitra-dosh.png'
+        image: `${BASE_IMAGE_PATH}/pitra-dosh.png`
       }
     ]
   },
   {
     id: 'pitru-puja',
     name: 'Pitru Puja',
-    image: '/images/pitra.jpg',
+    image: `${BASE_IMAGE_PATH}/pitra.jpg`,
     services: [
       {
         id: 'pind-daan',
@@ -73,7 +73,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 55,
-        image: `/images/pitra.jpg`
+        image: `${BASE_IMAGE_PATH}/pitra.jpg`
       },
       {
         id: 'shraadh',
@@ -83,7 +83,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 40,
-        image: `/images/puja.jpeg`
+        image: `${BASE_IMAGE_PATH}/puja.jpeg`
       },
       {
         id: 'tarpan',
@@ -93,14 +93,14 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.7,
         reviews: 38,
-        image: `/images/tarpan.png`
+        image: `${BASE_IMAGE_PATH}/tarpan.png`
       }
     ]
   },
   {
     id: 'pujas',
     name: 'Pujas',
-    image: `/images/puja.jpeg`,
+    image: `${BASE_IMAGE_PATH}/puja.jpeg`,
     services: [
       {
         id: 'satyanarayan',
@@ -110,7 +110,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 75,
-        image: `/images/satyanarayan.png`
+        image: `${BASE_IMAGE_PATH}/satyanarayan.png`
       },
       {
         id: 'ganesh',
@@ -120,7 +120,7 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.8,
         reviews: 65,
-        image: `/images/ganesh.jpeg`
+        image: `${BASE_IMAGE_PATH}/ganesh.jpeg`
       },
       {
         id: 'lakshmi',
@@ -130,14 +130,14 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.9,
         reviews: 70,
-        image: `/images/laxmi.png`
+        image: `${BASE_IMAGE_PATH}/laxmi.png`
       }
     ]
   },
   {
     id: 'havans',
     name: 'Havans',
-    image: '/images/hawan.jpeg',
+    image: `${BASE_IMAGE_PATH}/hawan.jpeg`,
     services: [
       {
         id: 'rudrabhishek',
@@ -147,7 +147,7 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.9,
         reviews: 48,
-        image: `/images/rudra.jpeg`
+        image: `${BASE_IMAGE_PATH}/rudra.jpeg`
       },
       {
         id: 'maha-mrityunjaya',
@@ -157,14 +157,14 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 52,
-        image: `/images/rudra.jpeg`
+        image: `${BASE_IMAGE_PATH}/rudra.jpeg`
       }
     ]
   },
   {
     id: 'jaaps',
     name: 'Jaaps',
-    image: `/images/tarpan.png`,
+    image: `${BASE_IMAGE_PATH}/tarpan.png`,
     services: [
       {
         id: 'gayatri',
@@ -174,7 +174,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.7,
         reviews: 45,
-        image: `/images/gayatri.jpg`
+        image: `${BASE_IMAGE_PATH}/gayatri.jpg`
       },
       {
         id: 'mahamrityunjaya',
@@ -184,14 +184,14 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 40,
-        image: `images/mahamrityunjaya.png`
+        image: `${BASE_IMAGE_PATH}/mahamrityunjaya.png`
       }
     ]
   },
   {
     id: 'paths',
     name: 'Paths',
-    image: `/images/hawan.jpeg`,
+    image: `${BASE_IMAGE_PATH}/hawan.jpeg`,
     services: [
       {
         id: 'sunderkand',
@@ -201,7 +201,7 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.9,
         reviews: 65,
-        image: `/images/sunder.png`
+        image: `${BASE_IMAGE_PATH}/sunder.png`
       },
       {
         id: 'hanuman-chalisa',
@@ -211,14 +211,14 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.8,
         reviews: 58,
-        image: `/images/hanuman.png`
+        image: `${BASE_IMAGE_PATH}/hanuman.png`
       }
     ]
   },
   {
     id: 'bhajans-chowki',
     name: 'Bhajans & Chowki',
-    image: `/images/navratri.jpeg`,
+    image: `${BASE_IMAGE_PATH}/navratri.jpeg`,
     services: [
       {
         id: 'mata-ki-chowki',
@@ -228,7 +228,7 @@ export const categories = [
         duration: '4-5 hours',
         rating: 4.9,
         reviews: 72,
-        image: `/images/mata.jpeg`
+        image: `${BASE_IMAGE_PATH}/mata.jpeg`
       },
       {
         id: 'bhajan-sandhya',
@@ -238,14 +238,14 @@ export const categories = [
         duration: '3-4 hours',
         rating: 4.8,
         reviews: 65,
-        image: `/images/sandhay.jpeg`
+        image: `${BASE_IMAGE_PATH}/sandhay.jpeg`
       }
     ]
   },
   {
     id: 'festival-pooja',
     name: 'Festival Pooja',
-    image: `/images/diwali.jpeg`,
+    image: `${BASE_IMAGE_PATH}/diwali.jpeg`,
     services: [
       {
         id: 'diwali-puja',
@@ -255,7 +255,7 @@ export const categories = [
         duration: '1-2 hours',
         rating: 4.9,
         reviews: 85,
-        image: `/images/diwali.jpeg`
+        image: `${BASE_IMAGE_PATH}/diwali.jpeg`
       },
       {
         id: 'ganesh-chaturthi',
@@ -265,7 +265,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.9,
         reviews: 78,
-        image: `/images/ganesh.jpeg`
+        image: `${BASE_IMAGE_PATH}/ganesh.jpeg`
       },
       {
         id: 'navratri-puja',
@@ -275,7 +275,7 @@ export const categories = [
         duration: '2-3 hours',
         rating: 4.8,
         reviews: 82,
-        image: `/images/navratri.jpeg`
+        image: `${BASE_IMAGE_PATH}/navratri.jpeg`
       }
     ]
   }
