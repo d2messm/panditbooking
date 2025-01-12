@@ -60,8 +60,16 @@ const BookingPage = () => {
           )}
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Navigation Links */}
+            <div className="flex justify-between mb-6">
+              <a href="#puja-selection" className="text-orange-600 hover:underline">Puja Selection</a>
+              <a href="#date-time" className="text-orange-600 hover:underline">Date & Time</a>
+              <a href="#personal-details" className="text-orange-600 hover:underline">Personal Details</a>
+              <a href="#special-requirements" className="text-orange-600 hover:underline">Special Requirements</a>
+            </div>
+
             {/* Puja Selection */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div id="puja-selection" className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Select Puja</label>
                 <select
@@ -101,7 +109,7 @@ const BookingPage = () => {
             </div>
 
             {/* Date and Time */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div id="date-time" className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   <Calendar className="inline-block w-4 h-4 mr-2" />
@@ -134,7 +142,7 @@ const BookingPage = () => {
             </div>
 
             {/* Personal Details */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div id="personal-details" className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   <User className="inline-block w-4 h-4 mr-2" />
@@ -200,7 +208,7 @@ const BookingPage = () => {
               )}
             </div>
 
-            <div>
+            <div id="special-requirements">
               <label className="block text-sm font-medium text-gray-700">
                 Special Requirements (Optional)
               </label>
