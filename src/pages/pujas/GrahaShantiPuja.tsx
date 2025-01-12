@@ -40,6 +40,12 @@ const GrahaShantiPuja = () => {
     ]
   };
 
+  const handleBookNow = () => {
+    setPuja(pujaDetails.id);
+    setAmount(pujaDetails.price);
+    navigate(`/booking-puja/${pujaDetails.id}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}

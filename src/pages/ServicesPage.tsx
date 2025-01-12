@@ -128,7 +128,7 @@ const ServicesPage = () => {
                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
               >
                 <img
-                  src={`https://source.unsplash.com/400x300/?hindu,puja&${service.id}`}
+                  src={service.image}
                   alt={service.name}
                   className="w-full h-48 object-cover"
                 />
