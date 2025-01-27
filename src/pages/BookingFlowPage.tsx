@@ -64,7 +64,7 @@ const BookingFlowPage = () => {
           <div className="bg-gray-50 rounded-lg p-4 mb-6">
             <div className="flex items-start gap-4">
               <img 
-                src="/path-to-service-image.jpg" 
+                src="/images/hindu.webp" 
                 alt="Service" 
                 className="w-24 h-24 rounded-lg object-cover"
               />

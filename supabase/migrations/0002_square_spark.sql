@@ -20,6 +20,14 @@
       - `status` (enum)
       - `language` (text)
       - `special_requirements` (text)
+      - `address` (text)
+      - `city` (text)
+      - `state` (text)
+      - `pincode` (text)
+      - `amount` (integer)
+      - `payment_type` (text)
+      - `payment_id` (text)
+      - `payment_status` (text)
       - `created_at` (timestamp)
 
   2. Security
@@ -48,13 +56,21 @@ END $$;
 -- Create bookings table
 CREATE TABLE IF NOT EXISTS bookings (
   id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
+  user_id uuid REFERENCES auth.users ON DELETE CASCADE NOT NULL,
   puja_id uuid REFERENCES pujas(id) ON DELETE CASCADE NOT NULL,
   booking_date date NOT NULL,
   booking_time time NOT NULL,
   status booking_status NOT NULL DEFAULT 'pending',
   language text NOT NULL,
   special_requirements text,
+  address text,
+  city text,
+  state text,
+  pincode text,
+  amount integer,
+  payment_type text,
+  payment_id text,
+  payment_status text DEFAULT 'pending',
   created_at timestamptz DEFAULT now()
 );
 

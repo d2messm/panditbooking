@@ -1,10 +1,4 @@
-import { useState } from 'react';
-import { Star, Clock, MapPin, Calendar, Check, Info } from 'lucide-react';
-import PaymentButton from '../../components/PaymentButton';
-
 const LakshmiPuja = () => {
-  const [selectedTab] = useState('description');
-
   const pujaDetails = {
     name: "Lakshmi Puja",
     price: 2199,
@@ -40,10 +34,13 @@ const LakshmiPuja = () => {
     ]
   };
 
-  // Copy the same JSX structure from GaneshPuja
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Copy the entire JSX structure from GaneshPuja */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-4">{pujaDetails.name}</h1>
+        <p className="text-lg mb-4">{pujaDetails.description}</p>
+        <div className="text-xl font-semibold">₹{pujaDetails.price}</div>
+      </div>
     </div>
   );
 };

@@ -33,7 +33,7 @@ export const useAuth = () => {
 
   const handleSignUp = async (email: string, password: string, userData: { name: string; phone: string }) => {
     try {
-      await signUp(email, password, userData);
+      await signUp({email, password, ...userData});
       navigate('/login');
     } catch (error) {
       console.error('Error signing up:', error);

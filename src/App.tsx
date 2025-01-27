@@ -15,6 +15,7 @@ import PaymentInfoPage from './pages/PaymentInfoPage';
 import BookingFlowPage from './pages/BookingFlowPage';
 import PujaDetailPage from './pages/PujaDetailPage';
 import BookingPuja from './pages/BookingPuja';
+import CategoryPage from './pages/CategoryPage';
 import { useBookingFlowStore } from './stores/bookingFlowStore';
 
 function HomePage() {
@@ -65,7 +66,15 @@ function App() {
           />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/services" element={<ServicesPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/category/:id" element={<CategoryPage />} />
+          <Route 
+            path="/payment" 
+            element={
+              <ProtectedRoute>
+                <PaymentPage />
+              </ProtectedRoute>
+            } 
+          />
           <Route path="/payment-info" element={<PaymentInfoPage />} />
           <Route path="/booking/:step" element={<BookingFlowPage />} />
           <Route path="/puja/:id" element={<PujaDetailPage />} />

@@ -17,6 +17,12 @@ const PaymentPage = () => {
   const { user } = useAuthStore();
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (!bookingDetails.puja_id) {
+      navigate('/services');
+    }
+  }, [bookingDetails.puja_id, navigate]);
+
   // Get base price and calculate GST
   const basePrice = 13100;  // Get from the package price div
   const gstAmount = Math.round(basePrice * 0.18);  // 18% GST
@@ -48,6 +54,28 @@ const PaymentPage = () => {
     try {
       setLoading(true);
 
+      if (!user?.id) {
+        throw new Error('User not authenticated');
+      }
+
+      console.log('Current user:', user);
+      console.log('User ID:', user.id);
+      console.log('Booking details:', bookingDetails);
+
+      // Validate booking details
+      if (!bookingDetails.puja_id) {
+        throw new Error('No puja selected');
+      }
+      if (!bookingDetails.booking_date) {
+        throw new Error('No booking date selected');
+      }
+      if (!bookingDetails.booking_time) {
+        throw new Error('No booking time selected');
+      }
+      if (!bookingDetails.language) {
+        throw new Error('No language selected');
+      }
+
       // Load Razorpay script
       const res = await loadRazorpay();
       if (!res) {
@@ -59,7 +87,7 @@ const PaymentPage = () => {
         .from('bookings')
         .insert([
           {
-            user_id: user?.id,
+            user_id: user.id,
             puja_id: bookingDetails.puja_id,
             booking_date: bookingDetails.booking_date,
             booking_time: bookingDetails.booking_time,

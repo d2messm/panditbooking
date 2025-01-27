@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, Search, Filter, Star } from 'lucide-react';
+import { ChevronDown, Search, Filter, Star, ArrowRight } from 'lucide-react';
 import { categories, filters } from '../data/services';
 import CategorySlider from '../components/CategorySlider';
 
@@ -23,10 +23,35 @@ const ServicesPage = () => {
         </div>
       </div>
 
-      {/* Category Slider */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h2 className="text-2xl font-semibold mb-6">Categories</h2>
-        <CategorySlider onCategoryChange={handleCategoryChange} />
+      {/* Categories Grid */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h2 className="text-2xl font-semibold mb-8">Browse by Category</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categories.map((category) => (
+            <Link
+              key={category.id}
+              to={`/category/${category.id}`}
+              className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+            >
+              <div className="relative h-48">
+                <img
+                  src={category.image}
+                  alt={category.name}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h3 className="text-xl font-semibold text-white">{category.name}</h3>
+                  <p className="text-white/80 text-sm mt-1">{category.services.length} Services</p>
+                </div>
+              </div>
+              <div className="p-4 flex items-center justify-between text-orange-600 group-hover:text-orange-700">
+                <span className="font-medium">View All Services</span>
+                <ArrowRight className="h-5 w-5" />
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
       {/* Search and Filters */}
@@ -121,6 +146,12 @@ const ServicesPage = () => {
           {categories
             .filter((category) => selectedCategory === 'all' || category.id === selectedCategory)
             .flatMap((category) => category.services || [])
+            .filter((service) =>
+              searchQuery
+                ? service.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                  service.description.toLowerCase().includes(searchQuery.toLowerCase())
+                : true
+            )
             .map((service) => (
               <Link
                 key={service.id}
@@ -138,7 +169,7 @@ const ServicesPage = () => {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
                       <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                      <span className="ml-1 text-sm text-gray-600">4.8 (50+)</span>
+                      <span className="ml-1 text-sm text-gray-600">{service.rating} ({service.reviews}+)</span>
                     </div>
                     <div className="text-orange-600 font-semibold">₹{service.price}</div>
                   </div>

@@ -1,57 +1,73 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Star, Clock, MapPin, Calendar, Check, Info } from 'lucide-react';
-import PaymentButton from '../components/PaymentButton';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useBookingFlowStore } from '../stores/bookingFlowStore';
+import { categories } from '../data/services';
+import BookingFormModal from '../components/BookingFormModal';
+import { useAuth } from '../hooks/useAuth';
 
 const PujaDetailPage = () => {
   const [selectedTab, setSelectedTab] = useState('description');
   const navigate = useNavigate();
+  const { id } = useParams();
   const { setPuja, setAmount } = useBookingFlowStore();
+  const [pujaDetails, setPujaDetails] = useState<any>(null);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const { user } = useAuth();
 
-  const pujaDetails = {
-    id: "dhanvantri-havan",
-    name: "Dhanvantri Havan",
-    rating: 4.9,
-    reviews: 50,
-    price: 2999,
-    duration: "2-3 hours",
-    description: "Dhanvantri Havan is performed to seek blessings of Lord Dhanvantri, the god of medicine and Ayurveda. This puja helps in maintaining good health and recovering from illnesses.",
-    benefits: [
-      "Helps in maintaining good health",
-      "Removes health-related obstacles",
-      "Brings peace and prosperity",
-      "Protects from diseases",
-      "Strengthens immune system"
-    ],
-    items: [
-      "Havan Samagri",
-      "Ghee",
-      "Flowers",
-      "Fruits",
-      "Coconut",
-      "Incense Sticks",
-      "Camphor",
-      "Wooden Sticks"
-    ],
-    process: [
-      "Sankalp (Resolution)",
-      "Kalash Sthapana",
-      "Havan Setup",
-      "Dhanvantri Puja",
-      "Main Havan",
-      "Purnahuti",
-      "Aarti",
-      "Prasad Distribution"
-    ],
-    image: "/images/festival.jpeg"
-  };
+  useEffect(() => {
+    // Find the puja in all categories
+    for (const category of categories) {
+      const puja = category.services.find(service => service.id === id);
+      if (puja) {
+        setPujaDetails({
+          ...puja,
+          benefits: [
+            "Brings peace and harmony",
+            "Removes obstacles",
+            "Improves overall well-being",
+            "Brings prosperity",
+            "Ensures success in endeavors"
+          ],
+          items: [
+            "Special Herbs",
+            "Flowers",
+            "Fruits",
+            "Ghee",
+            "Incense Sticks",
+            "Coconut",
+            "Rice",
+            "Sacred Thread"
+          ],
+          process: [
+            "Sankalp (Resolution)",
+            "Kalash Sthapana",
+            "Main Puja",
+            "Havan",
+            "Aarti",
+            "Prasad Distribution"
+          ]
+        });
+        break;
+      }
+    }
+  }, [id]);
 
   const handleBookNow = () => {
-    setPuja(pujaDetails.id);
-    setAmount(pujaDetails.price);
-    navigate(`/booking-puja/${pujaDetails.id}`);
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    setShowBookingModal(true);
   };
+
+  if (!pujaDetails) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-orange-500"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -61,36 +77,26 @@ const PujaDetailPage = () => {
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Left Column */}
             <div className="text-white">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{pujaDetails.name}</h1>
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="flex items-center">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <span className="ml-1">{pujaDetails.rating}</span>
-                </div>
-                <span>({pujaDetails.reviews}+ reviews)</span>
-              </div>
-              <div className="space-y-2">
+              <h1 className="text-4xl font-bold mb-4">{pujaDetails.name}</h1>
+              <p className="text-lg opacity-90 mb-6">{pujaDetails.description}</p>
+              <div className="flex items-center space-x-4 text-sm">
                 <div className="flex items-center">
                   <Clock className="h-5 w-5 mr-2" />
-                  <span>Duration: {pujaDetails.duration}</span>
+                  <span>{pujaDetails.duration}</span>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="h-5 w-5 mr-2" />
-                  <span>Available in all locations</span>
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-5 w-5 mr-2" />
-                  <span>Available on all days</span>
+                  <Star className="h-5 w-5 mr-2" />
+                  <span>{pujaDetails.rating} ({pujaDetails.reviews}+ reviews)</span>
                 </div>
               </div>
             </div>
 
             {/* Right Column - Image */}
-            <div className="rounded-lg overflow-hidden shadow-lg">
+            <div>
               <img
                 src={pujaDetails.image}
                 alt={pujaDetails.name}
-                className="w-full h-48 object-cover"
+                className="rounded-lg shadow-lg w-full h-64 object-cover"
               />
             </div>
           </div>
@@ -98,11 +104,10 @@ const PujaDetailPage = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-3 gap-8">
           {/* Left Content */}
-          <div className="md:col-span-2 space-y-6">
-            {/* Tabs */}
+          <div className="md:col-span-2">
             <div className="bg-white rounded-lg shadow-md">
               <div className="border-b">
                 <div className="flex">
@@ -134,7 +139,7 @@ const PujaDetailPage = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Benefits</h3>
                     <ul className="space-y-2">
-                      {pujaDetails.benefits.map((benefit, index) => (
+                      {pujaDetails.benefits.map((benefit: string, index: number) => (
                         <li key={index} className="flex items-start">
                           <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
                           <span className="text-gray-600">{benefit}</span>
@@ -148,7 +153,7 @@ const PujaDetailPage = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Puja Items Included</h3>
                     <ul className="grid grid-cols-2 gap-4">
-                      {pujaDetails.items.map((item, index) => (
+                      {pujaDetails.items.map((item: string, index: number) => (
                         <li key={index} className="flex items-center">
                           <span className="w-2 h-2 bg-orange-600 rounded-full mr-2"></span>
                           <span className="text-gray-600">{item}</span>
@@ -162,7 +167,7 @@ const PujaDetailPage = () => {
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Puja Process</h3>
                     <div className="space-y-4">
-                      {pujaDetails.process.map((step, index) => (
+                      {pujaDetails.process.map((step: string, index: number) => (
                         <div key={index} className="flex items-start">
                           <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-semibold text-sm">
                             {index + 1}
@@ -196,10 +201,8 @@ const PujaDetailPage = () => {
                 </div>
               </div>
 
-              <PaymentButton amount={pujaDetails.price} />
-
               <button 
-                onClick={handleBookNow} 
+                onClick={handleBookNow}
                 className="w-full bg-orange-600 text-white py-2 rounded-lg hover:bg-orange-700 transition"
               >
                 Book Now
@@ -212,6 +215,17 @@ const PujaDetailPage = () => {
           </div>
         </div>
       </div>
+
+      {/* Booking Form Modal */}
+      <BookingFormModal
+        isOpen={showBookingModal}
+        onClose={() => setShowBookingModal(false)}
+        pujaDetails={{
+          id: pujaDetails.id,
+          name: pujaDetails.name,
+          price: pujaDetails.price
+        }}
+      />
     </div>
   );
 };

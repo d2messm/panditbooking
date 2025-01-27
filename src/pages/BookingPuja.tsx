@@ -4,24 +4,24 @@ import { useBookingFlowStore } from '../stores/bookingFlowStore';
 import { supabase } from '../lib/supabase';
 
 const BookingPuja = () => {
-  const { id } = useParams(); // Get puja ID from URL
+  const { id } = useParams(); // Get service ID from URL
   const navigate = useNavigate();
   const { setPuja, bookingDetails } = useBookingFlowStore();
 
   useEffect(() => {
     const initializePuja = async () => {
       if (!id) {
-        console.error('No puja ID provided');
+        console.error('No service ID provided');
         navigate('/services');
         return;
       }
 
       try {
-        // Verify puja exists in database
+        // First, fetch the UUID from the pujas table based on the service ID
         const { data: puja, error } = await supabase
           .from('pujas')
           .select('id')
-          .eq('id', id)
+          .eq('service_id', id) // Assuming you have a service_id column
           .single();
 
         if (error || !puja) {
@@ -30,8 +30,8 @@ const BookingPuja = () => {
           return;
         }
 
-        // Set puja ID in store
-        setPuja(id);
+        // Set the UUID in the store
+        setPuja(puja.id);
         navigate('/book');
       } catch (error) {
         console.error('Error initializing puja:', error);
