@@ -44,11 +44,17 @@ const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <Link to="/" className="flex items-center">
+                 {/* <img
+                  //src="https://poojaimages.s3.ap-south-1.amazonaws.com/logo.webp"
+                  alt="Divine Purohit"
+                  className="h-12 w-auto"
+                /> */}
                 <img
-                  src="https://divinepurohit.in/wp-content/uploads/2024/12/cropped-legend.webp"
+                  src="https://poojaimages.s3.ap-south-1.amazonaws.com/logo.webp"
                   alt="Divine Purohit"
                   className="h-12 w-auto"
                 />
+                <b>Divine Purohit </b> 
               </Link>
             </div>
 
