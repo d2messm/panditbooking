@@ -11,11 +11,11 @@ const HomePage = () => {
       <main className="flex-grow">
         <Hero />
         <section id="categories" className="py-12 bg-secondary">
-          <h2 className="text-3xl font-bold text-center mb-8">Browse Pooja By Category</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Browse Pooja By Category</h2>
           <CategorySlider />
         </section>
         <section id="featured" className="py-12">
-          <h2 className="text-3xl font-bold text-center mb-8">Featured Poojas</h2>
+          <h2 className="text-2xl font-bold text-center mb-8">Featured Poojas</h2>
           <FeaturedPujas />
         </section>
       </main>
