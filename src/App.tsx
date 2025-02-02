@@ -17,6 +17,9 @@ import PujaDetailPage from './pages/PujaDetailPage';
 import BookingPuja from './pages/BookingPuja';
 import CategoryPage from './pages/CategoryPage';
 import { useBookingFlowStore } from './stores/bookingFlowStore';
+import TermsAndConditions from './pages/TermsAndConditions';
+import RefundPolicy from './pages/RefundPolicy';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function HomePage() {
   return (
@@ -48,6 +51,9 @@ function App() {
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/refund" element={<RefundPolicy />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route 
             path="/booking-puja/:id" 
             element={

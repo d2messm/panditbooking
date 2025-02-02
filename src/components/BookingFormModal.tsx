@@ -31,6 +31,7 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
   const [loading, setLoading] = useState(false);
   const { user } = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm<BookingFormData>();
+  const [error, setError] = useState<string | null>(null);
 
   const loadRazorpay = () => {
     return new Promise((resolve) => {
@@ -46,65 +47,81 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
     try {
       setLoading(true);
       
-      // Load Razorpay script
       const res = await loadRazorpay();
       if (!res) {
-        alert('Razorpay SDK failed to load');
+        setError('Razorpay SDK failed to load. Please refresh the page.');
         return;
       }
 
-      // Create booking record
-      const { data: booking, error: bookingError } = await supabase
-        .from('bookings')
-        .insert([
-          {
-            user_id: user?.id,
-            puja_id: pujaDetails.id,
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            address: formData.address,
-            city: formData.city,
-            state: formData.state,
-            pincode: formData.pincode,
-            booking_date: formData.booking_date,
-            booking_time: formData.booking_time,
-            special_requirements: formData.special_requirements,
-            amount: pujaDetails.price,
-            payment_status: 'pending'
-          }
-        ])
+      const { data: razorpayOrder, error: orderError } = await supabase
+        .from('razorpay_orders')
+        .insert([{
+          amount: pujaDetails.price * 100,
+          currency: 'INR',
+          receipt: `puja_${pujaDetails.id}`,
+          status: 'created'
+        }])
         .select()
         .single();
 
-      if (bookingError) throw bookingError;
+      if (orderError) {
+        setError(`Order creation failed: ${orderError.message}`);
+        return;
+      }
 
-      // Initialize Razorpay options
       const options = {
-        key: process.env.REACT_APP_RAZORPAY_KEY_ID,
-        amount: pujaDetails.price * 100, // amount in paisa
-        currency: 'INR',
+        key: '',
+        amount: razorpayOrder.amount,
+        currency: razorpayOrder.currency,
+        order_id: razorpayOrder.id,
         name: 'Pandit Booking',
         description: `Booking for ${pujaDetails.name}`,
-        order_id: booking.id,
         handler: async function (response: any) {
           try {
-            // Update booking with payment details
-            const { error: updateError } = await supabase
-              .from('bookings')
-              .update({
-                payment_id: response.razorpay_payment_id,
-                payment_status: 'completed'
+            const captureResponse = await fetch('/api/capture-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature
               })
-              .eq('id', booking.id);
+            });
 
-            if (updateError) throw updateError;
+            const result = await captureResponse.json();
+            if (!captureResponse.ok) throw new Error(result.error);
 
-            alert('Payment successful! Your booking has been confirmed.');
+            const { error: bookingError } = await supabase
+              .from('bookings')
+              .insert([
+                {
+                  user_id: user?.id,
+                  puja_id: pujaDetails.id,
+                  name: formData.name,
+                  email: formData.email,
+                  phone: formData.phone,
+                  address: formData.address,
+                  city: formData.city,
+                  state: formData.state,
+                  pincode: formData.pincode,
+                  booking_date: formData.booking_date,
+                  booking_time: formData.booking_time,
+                  special_requirements: formData.special_requirements,
+                  amount: pujaDetails.price,
+                  payment_status: 'confirmed'
+                }
+              ])
+              .select()
+              .single();
+
+            if (bookingError) {
+              setError(`Booking failed: ${bookingError.message}`);
+              return;
+            }
+
             onClose();
-          } catch (error) {
-            console.error('Error updating payment status:', error);
-            alert('Payment completed but there was an error updating the booking. Please contact support.');
+          } catch (err) {
+            setError(err instanceof Error ? err.message : 'Payment verification failed');
           }
         },
         prefill: {
@@ -117,11 +134,43 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
         }
       };
 
-      const paymentObject = new (window as any).Razorpay(options);
+      const paymentObject = new (window as any).Razorpay({
+        ...options,
+        handler: async function (response: any) {
+          try {
+            const captureResponse = await fetch('/api/capture-payment', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_signature: response.razorpay_signature
+              })
+            });
+
+            const result = await captureResponse.json();
+            if (!captureResponse.ok) throw new Error(result.error);
+
+            // Update booking status
+            await supabase
+              .from('bookings')
+              .update({ status: 'confirmed' })
+              .eq('razorpay_order_id', response.razorpay_order_id);
+            
+            onClose();
+          } catch (err) {
+            setError(err instanceof Error ? err.message : 'Payment verification failed');
+          }
+        }
+      });
+
+      paymentObject.on('payment.failed', function (response: any) {
+        setError(`Payment failed: ${response.error.description} (Code ${response.error.code})`);
+      });
+
       paymentObject.open();
-    } catch (error) {
-      console.error('Error processing payment:', error);
-      alert('There was an error processing your payment. Please try again.');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
       setLoading(false);
     }
@@ -139,6 +188,12 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
               <X className="h-6 w-6" />
             </button>
           </div>
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit(handlePayment)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

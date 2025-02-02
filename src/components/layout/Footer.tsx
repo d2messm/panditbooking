@@ -9,9 +9,14 @@ const Footer = () => {
           {/* About Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">About Divine Bookings</h3>
-            <p className="text-orange-200 text-sm">
+            <p className="text-orange-200 text-sm mb-4">
               Connecting devotees with experienced pandits for authentic puja ceremonies and spiritual guidance.
             </p>
+            <ul className="space-y-2">
+              <li><Link to="/privacy" className="text-orange-200 hover:text-white text-sm">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-orange-200 hover:text-white text-sm">Terms & Conditions</Link></li>
+              <li><Link to="/refund" className="text-orange-200 hover:text-white text-sm">Refund Policy</Link></li>
+            </ul>
           </div>
 
           {/* Quick Links */}

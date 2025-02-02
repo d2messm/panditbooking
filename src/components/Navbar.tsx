@@ -33,7 +33,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <span className="text-gray-600 text-sm">Call us: 8150 87 87 17</span>
+            <span className="text-gray-600 text-sm">Call us: +91 96506 87457</span>
           </div>
         </div>
       </div>

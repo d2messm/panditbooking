@@ -1,22 +1,53 @@
 const PrivacyPolicy = () => {
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-3xl mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-4">Privacy Policy</h1>
-        <p className="mb-4">This Privacy Policy describes how we collect, use, and share your personal information when you use our services.</p>
-        <h2 className="text-2xl font-semibold mb-2">Information We Collect</h2>
-        <p className="mb-4">We collect information about you when you use our services, including your name, email address, phone number, and payment information.</p>
-        <h2 className="text-2xl font-semibold mb-2">How We Use Your Information</h2>
-        <p className="mb-4">We use your information to provide and improve our services, process payments, and communicate with you.</p>
-        <h2 className="text-2xl font-semibold mb-2">Sharing Your Information</h2>
-        <p className="mb-4">We may share your information with third parties to help us provide our services, comply with legal obligations, or protect our rights.</p>
-        <h2 className="text-2xl font-semibold mb-2">Your Rights</h2>
-        <p className="mb-4">You have the right to access, update, or delete your personal information. Contact us to exercise these rights.</p>
-        <h2 className="text-2xl font-semibold mb-2">Contact Us</h2>
-        <p>If you have any questions about this Privacy Policy, please contact us at [Your Contact Information].</p>
+    <div className="min-h-screen bg-orange-50 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+          <h1 className="text-4xl font-bold text-orange-900 mb-6">Your Sacred Digital Space</h1>
+          <p className="text-orange-800 mb-8 text-lg">Last Updated: 01-01-2025 | Your Trust, Our Spiritual Commitment</p>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-orange-900 mb-4 border-b-2 border-orange-200 pb-2">📜 Information We Collect</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              We gather only essential details to enable your spiritual journey - name, contact information, and payment details, all protected with Vedic-level encryption.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-orange-900 mb-4 border-b-2 border-orange-200 pb-2">🕉️ Sacred Usage</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              Your information fuels personalized puja experiences, seamless payment processing, and divine communication - never for commercial exploitation.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-orange-900 mb-4 border-b-2 border-orange-200 pb-2">🤝 Dharma Sharing</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              We share only with trusted priests and ritual partners, maintaining strict confidentiality. Your data never leaves the sacred circle of service.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-orange-900 mb-4 border-b-2 border-orange-200 pb-2">🔐 Divine Rights</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              Exercise full control through our <span className="text-orange-600 font-semibold">Purity Portal</span> - access, modify, or erase your digital footprint anytime.
+            </p>
+          </section>
+
+          <section className="mb-12">
+            <h2 className="text-2xl font-semibold text-orange-900 mb-4 border-b-2 border-orange-200 pb-2">📮 Connect with Keepers</h2>
+            <div className="bg-orange-50 p-6 rounded-xl">
+              <p className="text-gray-700">
+                For spiritual data inquiries:<br/>
+                <span className="text-orange-600 font-medium">📧 <a href="mailto:privacy@divinepurohit.in" className="hover:text-orange-800 transition-colors">privacy@divinepurohit.in</a></span><br/>
+                <span className="text-orange-600 font-medium">📱 +91 96506 87457 (Data Protection Priests)</span>
+              </p>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   );
 };
 
-export default PrivacyPolicy; 
+export default PrivacyPolicy;
