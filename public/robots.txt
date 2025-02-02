@@ -1,8 +1,7 @@
 User-agent: *
 Allow: /
-Disallow: /private/
 Disallow: /profile
 Disallow: /payment
 Disallow: /book
 
-Sitemap: https://www.divinepurohit.in/sitemap.xml
+Sitemap: https://divinepurohit.in/sitemap.xml 
