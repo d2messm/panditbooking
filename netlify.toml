@@ -1,3 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain"
+
+# Optional: Redirect all 404s to index.html for SPA routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
