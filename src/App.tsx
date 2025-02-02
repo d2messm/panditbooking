@@ -44,7 +44,7 @@ const ProtectedBookingRoute = () => {
 function App() {
   return (
     <Router>
-      <Layout>
+      <Layout className="sticky top-0 z-50 bg-white shadow-lg">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginForm />} />

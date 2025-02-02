@@ -183,127 +183,127 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
       <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold">Book {pujaDetails.name}</h2>
+            <h2 className="text-2xl font-semibold">Book {pujaDetails.name}</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
               <X className="h-6 w-6" />
             </button>
           </div>
 
           {error && (
-            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg text-xs">
+            <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg">
               {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit(handlePayment)} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form onSubmit={handleSubmit(handlePayment)} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Name */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Name</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                 <input
                   type="text"
                   {...register('name', { required: 'Name is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>}
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
               </div>
 
               {/* Email */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Email</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input
                   type="email"
                   {...register('email', { required: 'Email is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
               </div>
 
               {/* Phone */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Phone</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                 <input
                   type="tel"
                   {...register('phone', { required: 'Phone is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone.message}</p>}
+                {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
               </div>
 
               {/* Address */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Address</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
                 <input
                   type="text"
                   {...register('address', { required: 'Address is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.address && <p className="text-red-500 text-xs mt-1">{errors.address.message}</p>}
+                {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
               </div>
 
               {/* City */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">City</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
                 <input
                   type="text"
                   {...register('city', { required: 'City is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.city && <p className="text-red-500 text-xs mt-1">{errors.city.message}</p>}
+                {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
               </div>
 
               {/* State */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">State</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
                 <input
                   type="text"
                   {...register('state', { required: 'State is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state.message}</p>}
+                {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state.message}</p>}
               </div>
 
               {/* Pincode */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Pincode</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Pincode</label>
                 <input
                   type="text"
                   {...register('pincode', { required: 'Pincode is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.pincode && <p className="text-red-500 text-xs mt-1">{errors.pincode.message}</p>}
+                {errors.pincode && <p className="text-red-500 text-sm mt-1">{errors.pincode.message}</p>}
               </div>
 
               {/* Booking Date */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Booking Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Booking Date</label>
                 <input
                   type="date"
                   {...register('booking_date', { required: 'Booking date is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.booking_date && <p className="text-red-500 text-xs mt-1">{errors.booking_date.message}</p>}
+                {errors.booking_date && <p className="text-red-500 text-sm mt-1">{errors.booking_date.message}</p>}
               </div>
 
               {/* Booking Time */}
               <div>
-                <label className="block text-xs font-medium text-gray-700 mb-1">Preferred Time</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
                 <input
                   type="time"
                   {...register('booking_time', { required: 'Booking time is required' })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
                 />
-                {errors.booking_time && <p className="text-red-500 text-xs mt-1">{errors.booking_time.message}</p>}
+                {errors.booking_time && <p className="text-red-500 text-sm mt-1">{errors.booking_time.message}</p>}
               </div>
             </div>
 
             {/* Special Requirements */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">Special Requirements (Optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Special Requirements (Optional)</label>
               <textarea
                 {...register('special_requirements')}
                 rows={3}
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 text-xs"
+                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
               />
             </div>
 
@@ -312,7 +312,7 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
               <button
                 type="submit"
                 disabled={loading}
-                className="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors disabled:opacity-50 text-sm"
+                className="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors disabled:opacity-50"
               >
                 {loading ? 'Processing...' : `Pay ₹${pujaDetails.price}`}
               </button>
