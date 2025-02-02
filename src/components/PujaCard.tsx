@@ -25,9 +25,6 @@ const PujaCard: React.FC<PujaCardProps> = ({ puja }) => {
           <IndianRupee className="h-5 w-5 mr-2" />
           <span>₹{puja.price.toLocaleString()}</span>
         </div>
-        <button className="mt-4 w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition-colors duration-300">
-          Book Now
-        </button>
       </div>
     </div>
   );

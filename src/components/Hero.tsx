@@ -1,66 +1,38 @@
-import { Calendar, Users, Clock } from 'lucide-react';
+import { Phone } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <div className="relative bg-orange-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+    <div className="relative bg-gradient-to-r from-orange-50 to-orange-100">
+      {/* Hero Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="text-center">
-          <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-            <span className="block">Book Your Puja Services</span>
-            <span className="block text-orange-600">With Expert Pandits</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            India's Most Trusted Puja Services Platform
           </h1>
-          <p className="mt-3 max-w-md mx-auto text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl md:max-w-3xl">
-            Connect with experienced pandits for all your religious ceremonies. Book online for a seamless spiritual experience.
+          <p className="text-xl md:text-2xl text-gray-600 mb-8">
+            Your One-Stop Hassle-Free Pooja Booking Destination
           </p>
-          <div className="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8">
-            <div className="rounded-md shadow">
-              <a
-                href="/services"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 md:py-4 md:text-lg md:px-10"
-              >
-                Book Now
-              </a>
-            </div>
-            <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-              <a
-                href="/about"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-orange-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
-              >
-                Learn More
-              </a>
-            </div>
+          <div className="inline-flex items-center justify-center space-x-2 bg-white px-6 py-3 rounded-lg shadow-md">
+            <Phone className="h-6 w-6 text-orange-600" />
+            <span className="text-2xl font-bold text-gray-800">+91 96506 87457</span>
           </div>
         </div>
 
-        <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-3">
-          <div className="text-center">
-            <div className="flex justify-center">
-              <Calendar className="h-12 w-12 text-orange-600" />
+        {/* Statistics */}
+        <div className="mt-12 grid grid-cols-2 gap-8 max-w-2xl mx-auto">
+          <div className="bg-white rounded-lg shadow-md p-6 text-center relative">
+            <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
+              New
             </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">Easy Booking</h3>
-            <p className="mt-2 text-base text-gray-500">
-              Book your preferred puja service online with just a few clicks
-            </p>
+            <div className="text-3xl font-bold text-orange-600 mb-2">50+</div>
+            <div className="text-gray-600">Home Pooja Services</div>
           </div>
-
-          <div className="text-center">
-            <div className="flex justify-center">
-              <Users className="h-12 w-12 text-orange-600" />
+          <div className="bg-white rounded-lg shadow-md p-6 text-center relative">
+            <div className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full">
+              New
             </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">Expert Pandits</h3>
-            <p className="mt-2 text-base text-gray-500">
-              Connect with experienced and knowledgeable pandits
-            </p>
-          </div>
-
-          <div className="text-center">
-            <div className="flex justify-center">
-              <Clock className="h-12 w-12 text-orange-600" />
-            </div>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">Flexible Timing</h3>
-            <p className="mt-2 text-base text-gray-500">
-              Choose from multiple time slots that suit your schedule
-            </p>
+            <div className="text-3xl font-bold text-orange-600 mb-2">50+</div>
+            <div className="text-gray-600">Temple Services</div>
           </div>
         </div>
       </div>

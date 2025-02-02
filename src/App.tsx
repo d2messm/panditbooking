@@ -20,12 +20,15 @@ import { useBookingFlowStore } from './stores/bookingFlowStore';
 import TermsAndConditions from './pages/TermsAndConditions';
 import RefundPolicy from './pages/RefundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import TestimonialsPage from './components/Testimonials';
+import Testimonials from './components/Testimonials';
 
 function HomePage() {
   return (
     <div className="bg-white">
       <Hero />
       <PujaList />
+      <Testimonials />
     </div>
   );
 }
@@ -51,6 +54,7 @@ function App() {
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/testimonials" element={<TestimonialsPage />} />
           <Route path="/terms" element={<TermsAndConditions />} />
           <Route path="/refund" element={<RefundPolicy />} />
           <Route path="/privacy" element={<PrivacyPolicy />} />
