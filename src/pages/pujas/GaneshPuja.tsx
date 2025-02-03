@@ -15,82 +15,99 @@ const GaneshPuja = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-orange-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="text-white">
-              <h1 className="text-3xl md:text-4xl font-bold mb-4">{pujaDetails.name}</h1>
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="flex items-center">
-                  <Star className="h-5 w-5 text-yellow-400 fill-current" />
-                  <span className="ml-1">{pujaDetails.rating}</span>
-                </div>
-                <span>({pujaDetails.reviews}+ reviews)</span>
+      <div className="bg-gradient-to-r from-orange-500 to-orange-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-4 py-6 md:py-8">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
+            <div className="text-white space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">🕉️</span>
+                <h1 className="text-xl md:text-3xl font-bold font-mukta">{pujaDetails.name}</h1>
               </div>
-              <div className="space-y-2">
-                <div className="flex items-center">
-                  <Clock className="h-5 w-5 mr-2" />
-                  <span>Duration: {pujaDetails.duration}</span>
+              <p className="text-xs md:text-sm opacity-90">Bring home divine blessings with our authentic Vedic rituals</p>
+              
+              <div className="flex flex-wrap items-center gap-4 text-xs">
+                <div className="flex items-center bg-orange-600/20 px-3 py-1 rounded-full">
+                  <Star className="h-4 w-4 text-yellow-400 mr-1" />
+                  <span>{pujaDetails.rating} ({pujaDetails.reviews}+ जनसमीक्षा)</span>
                 </div>
                 <div className="flex items-center">
-                  <MapPin className="h-5 w-5 mr-2" />
-                  <span>Available in all locations</span>
+                  <Clock className="h-4 w-4 mr-2" />
+                  <span>{pujaDetails.duration}</span>
                 </div>
+              </div>
+
+              <div className="mt-4 bg-white/10 p-3 rounded-lg">
+                <p className="text-[11px] md:text-xs">🌟 शुभ मुहूर्त में बुक करें - 100% वैदिक विधि</p>
+                <p className="text-[11px] md:text-xs mt-1">🎁 Includes Ganesh Ji's Prasad & Photo</p>
               </div>
             </div>
 
-            <div className="rounded-lg overflow-hidden shadow-lg">
+            <div className="relative rounded-xl overflow-hidden shadow-xl border-4 border-orange-200">
               <img
                 src="/images/ganesh-puja.jpg"
                 alt={pujaDetails.name}
-                className="w-full h-64 object-cover"
+                className="w-full h-48 md:h-64 object-cover"
               />
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 p-4">
+                <p className="text-white text-xs">"विघ्नहर्ता गणपति की कृपा पाएं"</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-4 py-6 md:py-8">
+        <div className="grid md:grid-cols-3 gap-6">
           {/* Left Content */}
           <div className="md:col-span-2">
-            <div className="bg-white rounded-lg shadow-md">
+            <div className="bg-white rounded-xl shadow-sm">
               {/* Tabs */}
               <div className="border-b">
-                <div className="flex">
-                  {['description', 'benefits', 'items', 'process'].map((tab) => (
+                <div className="flex overflow-x-auto">
+                  {[
+                    {id: 'description', label: 'पूजा विवरण'},
+                    {id: 'benefits', label: 'लाभ'},
+                    {id: 'items', label: 'सामग्री'},
+                    {id: 'process', label: 'विधि प्रक्रिया'}
+                  ].map((tab) => (
                     <button
-                      key={tab}
-                      onClick={() => setSelectedTab(tab)}
-                      className={`px-6 py-3 text-sm font-medium ${
-                        selectedTab === tab
+                      key={tab.id}
+                      onClick={() => setSelectedTab(tab.id)}
+                      className={`px-4 py-2 text-xs font-medium whitespace-nowrap ${
+                        selectedTab === tab.id
                           ? 'border-b-2 border-orange-600 text-orange-600'
-                          : 'text-gray-500 hover:text-gray-700'
+                          : 'text-gray-500 hover:text-orange-500'
                       }`}
                     >
-                      {tab.charAt(0).toUpperCase() + tab.slice(1)}
+                      {tab.label}
                     </button>
                   ))}
                 </div>
               </div>
 
               {/* Tab Content */}
-              <div className="p-6">
+              <div className="p-4 md:p-6 space-y-4">
                 {selectedTab === 'description' && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">About {pujaDetails.name}</h3>
-                    <p className="text-gray-600">{pujaDetails.description}</p>
+                    <h3 className="text-md font-semibold mb-3 flex items-center gap-2">
+                      <span className="text-xl text-orange-600">🕉️</span>
+                      {pujaDetails.name} की महिमा
+                    </h3>
+                    <p className="text-gray-600 text-xs leading-relaxed">
+                      {pujaDetails.description}
+                      <span className="block mt-2 text-orange-600 text-xs">✨ सुख-समृद्धि का वरदान</span>
+                    </p>
                   </div>
                 )}
 
                 {selectedTab === 'benefits' && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Benefits</h3>
+                    <h3 className="text-md font-semibold mb-3">विशेष लाभ</h3>
                     <ul className="space-y-2">
                       {pujaDetails.benefits?.map((benefit, index) => (
-                        <li key={index} className="flex items-start">
-                          <Check className="h-5 w-5 text-green-500 mr-2 flex-shrink-0" />
+                        <li key={index} className="flex items-start text-xs">
+                          <Check className="h-4 w-4 text-green-500 mr-2 flex-shrink-0 mt-1" />
                           <span className="text-gray-600">{benefit}</span>
                         </li>
                       ))}
@@ -100,10 +117,10 @@ const GaneshPuja = () => {
 
                 {selectedTab === 'items' && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Puja Items Included</h3>
-                    <ul className="grid grid-cols-2 gap-4">
+                    <h3 className="text-md font-semibold mb-3">पूजन सामग्री</h3>
+                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       {pujaDetails.items?.map((item, index) => (
-                        <li key={index} className="flex items-center">
+                        <li key={index} className="flex items-center text-xs p-2 bg-orange-50 rounded">
                           <span className="w-2 h-2 bg-orange-600 rounded-full mr-2"></span>
                           <span className="text-gray-600">{item}</span>
                         </li>
@@ -114,11 +131,11 @@ const GaneshPuja = () => {
 
                 {selectedTab === 'process' && (
                   <div>
-                    <h3 className="text-lg font-semibold mb-4">Puja Process</h3>
-                    <div className="space-y-4">
+                    <h3 className="text-md font-semibold mb-3">वैदिक विधि</h3>
+                    <div className="space-y-3">
                       {pujaDetails.process?.map((step, index) => (
-                        <div key={index} className="flex items-start">
-                          <div className="flex-shrink-0 h-6 w-6 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-semibold text-sm">
+                        <div key={index} className="flex items-start text-xs bg-orange-50 p-3 rounded-lg">
+                          <div className="flex-shrink-0 h-5 w-5 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-semibold text-xs">
                             {index + 1}
                           </div>
                           <span className="ml-3 text-gray-600">{step}</span>
@@ -133,38 +150,54 @@ const GaneshPuja = () => {
 
           {/* Right Sidebar */}
           <div className="md:col-span-1">
-            <div className="bg-white rounded-lg shadow-md p-6 sticky top-8">
-              <div className="mb-4">
-                <span className="text-gray-500">Starting from</span>
-                <div className="text-3xl font-bold text-orange-600">₹{pujaDetails.price}</div>
+            <div className="bg-white rounded-xl shadow-sm p-4 md:p-6 sticky top-4">
+              <div className="mb-4 border-b pb-4">
+                <p className="text-xs text-gray-500">शुरुआती कीमत</p>
+                <div className="text-2xl font-bold text-orange-600">₹{pujaDetails.price}</div>
+                <p className="text-[10px] text-gray-400 mt-1">*वास्तु अनुसार कीमत भिन्न हो सकती है</p>
               </div>
               
-              <div className="space-y-4 mb-6">
-                <div className="flex items-center text-gray-600">
-                  <Clock className="h-5 w-5 mr-2" />
-                  <span>Duration: {pujaDetails.duration}</span>
+              <div className="space-y-3 mb-6">
+                <div className="flex items-center text-gray-600 text-sm">
+                  <Clock className="h-4 w-4 mr-2" />
+                  <span>{pujaDetails.duration} वैदिक अनुष्ठान</span>
                 </div>
-                <div className="flex items-center text-gray-600">
-                  <Info className="h-5 w-5 mr-2" />
-                  <span>Experienced Pandits</span>
+                <div className="flex items-center text-gray-600 text-sm">
+                  <Info className="h-4 w-4 mr-2" />
+                  <span>5+ वर्षों के अनुभवी पंडितजी</span>
                 </div>
               </div>
 
               <PaymentButton amount={pujaDetails.price} />
-
-              <p className="mt-4 text-sm text-gray-500 text-center">
-                100% Satisfaction Guaranteed
-              </p>
+              
+              <div className="mt-4 text-center">
+                <p className="text-[10px] text-gray-500">
+                  🪔 100% गारंटीड संतुष्टि<br/>
+                  🔒 सुरक्षित भुगतान
+                </p>
+                <div className="mt-2 flex justify-center items-center gap-2">
+                  <img src="/images/upi-logo.png" className="h-4" alt="UPI" />
+                  <img src="/images/visa-logo.png" className="h-4" alt="Visa" />
+                  <img src="/images/paytm-logo.png" className="h-4" alt="Paytm" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="py-8">
-        <BookingForm pujaDetails={pujaDetails} />
+      <div className="max-w-7xl mx-auto px-4 sm:px-4 py-6">
+        <div className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
+          <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <span className="text-xl text-orange-600">🕉️</span>
+            शुभ मुहूर्त बुक करें
+          </h3>
+          <BookingForm pujaDetails={pujaDetails} />
+          <p className="text-xs text-gray-500 mt-4 text-center">"गणपति बप्पा मोरया! 🙏"</p>
+        </div>
       </div>
     </div>
   );
 };
 
-export default GaneshPuja; 
+export default GaneshPuja;

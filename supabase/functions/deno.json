@@ -2,5 +2,8 @@
   "compilerOptions": {
     "lib": ["deno.window"]
   },
-  "importMap": "./import_map.json"
+  "importMap": "./import_map.json",
+  "imports": {
+    "razorpay": "https://esm.sh/razorpay@4.4.0"
+  }
 } 

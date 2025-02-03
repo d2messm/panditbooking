@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { Star, Clock, MapPin, Calendar, Check, Info } from 'lucide-react';
 import PaymentButton from '../../components/PaymentButton';
+import { useNavigate } from 'react-router-dom';
 
 const GrahaShantiPuja = () => {
   const [selectedTab, setSelectedTab] = useState('description');
-
+  const navigate = useNavigate();
   const pujaDetails = {
+    id: "graha-shanti",
     name: "Graha Shanti Puja",
     price: 2999,
     duration: "2-3 hours",
@@ -38,12 +40,6 @@ const GrahaShantiPuja = () => {
       "Aarti",
       "Prasad Distribution"
     ]
-  };
-
-  const handleBookNow = () => {
-    setPuja(pujaDetails.id);
-    setAmount(pujaDetails.price);
-    navigate(`/booking-puja/${pujaDetails.id}`);
   };
 
   return (

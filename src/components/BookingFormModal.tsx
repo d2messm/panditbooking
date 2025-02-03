@@ -53,46 +53,55 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
         return;
       }
 
-      const { data: razorpayOrder, error: orderError } = await supabase
-        .from('razorpay_orders')
-        .insert([{
-          amount: pujaDetails.price * 100,
-          currency: 'INR',
-          receipt: `puja_${pujaDetails.id}`,
-          status: 'created'
-        }])
-        .select()
-        .single();
+      // Create Razorpay order via Supabase function
+      const { data: orderData, error: orderError } = await supabase
+        .functions.invoke('create-razorpay-order', {
+          body: {
+            amount: pujaDetails.price, // Convert to paise
+            currency: 'INR',
+            receipt: `puja_${pujaDetails.id}`,
+            notes: {
+              puja_id: pujaDetails.id,
+              puja_name: pujaDetails.name,
+              customer_name: formData.name,
+              customer_email: formData.email,
+              customer_phone: formData.phone
+            }
+          }
+        });
 
       if (orderError) {
         setError(`Order creation failed: ${orderError.message}`);
         return;
       }
 
+      if (!orderData?.id) {
+        throw new Error('No order ID received');
+      }
+
       const options = {
-        key: '',
-        amount: razorpayOrder.amount,
-        currency: razorpayOrder.currency,
-        order_id: razorpayOrder.id,
+        key: 'rzp_test_e3shCqGWPE459i',
+        amount: orderData.amount,
+        currency: orderData.currency,
+        order_id: orderData.id,
         name: 'Pandit Booking',
         description: `Booking for ${pujaDetails.name}`,
         handler: async function (response: any) {
           try {
-            const captureResponse = await fetch('/api/capture-payment', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature
-              })
-            });
+            const { error: verificationError } = await supabase
+              .functions.invoke('verify-payment', {
+                body: {
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_signature: response.razorpay_signature,
+                  booking_id: orderData.id
+                }
+              });
 
-            const result = await captureResponse.json();
-            if (!captureResponse.ok) throw new Error(result.error);
+            if (verificationError) throw verificationError;
 
             const { error: bookingError } = await supabase
-              .from('bookings')
+              .from('booking')
               .insert([
                 {
                   user_id: user?.id,
@@ -108,7 +117,9 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                   booking_time: formData.booking_time,
                   special_requirements: formData.special_requirements,
                   amount: pujaDetails.price,
-                  payment_status: 'confirmed'
+                  payment_status: 'completed',
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id
                 }
               ])
               .select()
@@ -131,39 +142,15 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
         },
         theme: {
           color: '#ea580c'
+        },
+        modal: {
+          ondismiss: function() {
+            setLoading(false);
+          }
         }
       };
 
-      const paymentObject = new (window as any).Razorpay({
-        ...options,
-        handler: async function (response: any) {
-          try {
-            const captureResponse = await fetch('/api/capture-payment', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_signature: response.razorpay_signature
-              })
-            });
-
-            const result = await captureResponse.json();
-            if (!captureResponse.ok) throw new Error(result.error);
-
-            // Update booking status
-            await supabase
-              .from('bookings')
-              .update({ status: 'confirmed' })
-              .eq('razorpay_order_id', response.razorpay_order_id);
-            
-            onClose();
-          } catch (err) {
-            setError(err instanceof Error ? err.message : 'Payment verification failed');
-          }
-        }
-      });
-
+      const paymentObject = new (window as any).Razorpay(options);
       paymentObject.on('payment.failed', function (response: any) {
         setError(`Payment failed: ${response.error.description} (Code ${response.error.code})`);
       });
@@ -197,7 +184,6 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
 
           <form onSubmit={handleSubmit(handlePayment)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Name */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                 <input
@@ -208,7 +194,6 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
               </div>
 
-              {/* Email */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                 <input
@@ -219,7 +204,6 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>}
               </div>
 
-              {/* Phone */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                 <input
@@ -230,7 +214,6 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone.message}</p>}
               </div>
 
-              {/* Address */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Address</label>
                 <input
@@ -241,7 +224,6 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.address && <p className="text-red-500 text-sm mt-1">{errors.address.message}</p>}
               </div>
 
-              {/* City */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">City</label>
                 <input
@@ -252,7 +234,6 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city.message}</p>}
               </div>
 
-              {/* State */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
                 <input
@@ -274,7 +255,7 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.pincode && <p className="text-red-500 text-sm mt-1">{errors.pincode.message}</p>}
               </div>
 
-              {/* Booking Date */}
+              {/* Booking Date and Time */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Booking Date</label>
                 <input
@@ -285,9 +266,8 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
                 {errors.booking_date && <p className="text-red-500 text-sm mt-1">{errors.booking_date.message}</p>}
               </div>
 
-              {/* Booking Time */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Booking Time</label>
                 <input
                   type="time"
                   {...register('booking_time', { required: 'Booking time is required' })}
@@ -297,24 +277,13 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
               </div>
             </div>
 
-            {/* Special Requirements */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Special Requirements (Optional)</label>
-              <textarea
-                {...register('special_requirements')}
-                rows={3}
-                className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"
-              />
-            </div>
-
-            {/* Submit Button */}
-            <div className="flex justify-end">
+            <div className="flex justify-center mt-6">
               <button
                 type="submit"
+                className={`px-6 py-3 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 ${loading ? 'bg-gray-400' : 'bg-orange-500'}`}
                 disabled={loading}
-                className="bg-orange-600 text-white px-6 py-2 rounded-lg hover:bg-orange-700 transition-colors disabled:opacity-50"
               >
-                {loading ? 'Processing...' : `Pay ₹${pujaDetails.price}`}
+                {loading ? 'Processing Payment...' : `Pay ₹${pujaDetails.price}`}
               </button>
             </div>
           </form>
@@ -324,4 +293,4 @@ const BookingFormModal = ({ isOpen, onClose, pujaDetails }: BookingFormModalProp
   );
 };
 
-export default BookingFormModal; 
+export default BookingFormModal;
