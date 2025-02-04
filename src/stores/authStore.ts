@@ -32,7 +32,7 @@ export const useAuthStore = create<AuthState>((set) => ({
         data: {
           name: data.name || ''
         },
-        emailRedirectTo: 'http://localhost:5173/dashboard'
+        emailRedirectTo: 'https://divinepurohit.in/dashboard'
       }
     });
     if (error) throw error;
