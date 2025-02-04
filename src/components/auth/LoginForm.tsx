@@ -11,7 +11,7 @@ interface LoginFormData {
 }
 
 const LoginForm = () => {
-  const { signIn } = useAuth();
+  const { signIn, signInWithGoogle } = useAuth();
   const [error, setError] = useState<string>('');
   const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>();
@@ -24,9 +24,14 @@ const LoginForm = () => {
     }
   };
 
-  const handleSocialLogin = (provider: string) => {
-    console.log(`Login with ${provider}`);
-    // Implement social login logic here
+  const handleSocialLogin = async (provider: string) => {
+    if (provider === 'Google') {
+      try {
+        await signInWithGoogle();
+      } catch (err) {
+        setError('Google sign in failed');
+      }
+    }
   };
 
   return (
@@ -41,11 +46,6 @@ const LoginForm = () => {
             icon="https://www.google.com/favicon.ico"
             provider="Google"
             onClick={() => handleSocialLogin('Google')}
-          />
-          <SocialButton
-            icon="https://www.apple.com/favicon.ico"
-            provider="Apple"
-            onClick={() => handleSocialLogin('Apple')}
           />
 
           <div className="relative">

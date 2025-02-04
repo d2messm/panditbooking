@@ -22,6 +22,7 @@ import RefundPolicy from './pages/RefundPolicy';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TestimonialsPage from './components/Testimonials';
 import Testimonials from './components/Testimonials';
+import ForgotPassword from './components/auth/ForgotPassword';
 
 function HomePage() {
   return (
@@ -88,6 +89,7 @@ function App() {
           <Route path="/payment-info" element={<PaymentInfoPage />} />
           <Route path="/booking/:step" element={<BookingFlowPage />} />
           <Route path="/puja/:id" element={<PujaDetailPage />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </Layout>
     </Router>
