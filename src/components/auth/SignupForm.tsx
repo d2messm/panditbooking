@@ -251,26 +251,11 @@ const SignupForm = () => {
                       <div className="w-full border-t border-orange-200/70"></div>
                     </div>
                     <div className="relative flex justify-center text-sm">
-                      <span className="px-2 bg-white/90 text-orange-600/80 text-sm sm:text-base">
-                        Or with phone
-                      </span>
+                      
                     </div>
                   </div>
                   
-                  <div className="flex flex-col gap-2 sm:flex-row sm:gap-2">
-                    <input
-                      type="tel"
-                      placeholder="+91 98765 43210"
-                      className="flex-1 px-3 py-2 border border-orange-200/80 rounded-lg focus:ring-2 focus:ring-orange-500/50 text-sm sm:text-base"
-                      {...register('phone')}
-                    />
-                    <button
-                      onClick={handlePhoneSignup}
-                      className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors text-sm sm:text-base whitespace-nowrap"
-                    >
-                      Send OTP
-                    </button>
-                  </div>
+                  
                 </div>
               </div>
             </div>

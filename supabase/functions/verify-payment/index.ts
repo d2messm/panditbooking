@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import crypto from 'crypto';
-import { serve } from 'https://deno.land/std@0.131.0/http/server.ts';
+import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
+import { createHmac } from 'https://deno.land/std@0.168.0/crypto/mod.ts';
 
 const supabase = createClient(
   process.env.SUPABASE_URL!,
@@ -22,16 +23,15 @@ export default serve(async (req) => {
   }
 
   try {
-    const body = await req.json();
-    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = body;
+    const { razorpay_payment_id, razorpay_order_id, razorpay_signature } = await req.json();
 
-    // Verify the signature
-    const expectedSignature = crypto
-      .createHmac('sha256', process.env.RAZORPAY_SECRET!)
+    // Verify signature
+    const secret = Deno.env.get('RAZORPAY_KEY_SECRET') || '';
+    const generated_signature = createHmac('sha256', secret)
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
       .digest('hex');
 
-    if (expectedSignature !== razorpay_signature) {
+    if (generated_signature !== razorpay_signature) {
       throw new Error('Invalid payment signature');
     }
 
@@ -49,21 +49,22 @@ export default serve(async (req) => {
       .update({ payment_status: 'completed' })
       .eq('id', data[0]?.booking_id);
 
-    return new Response(JSON.stringify({ success: true }), {
+    return new Response(JSON.stringify({ verified: true }), {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true',
         'Access-Control-Expose-Headers': 'Content-Length, Content-MD5'
-      }
+      },
+      status: 200,
     });
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
-      }
+      },
+      status: 400,
     });
   }
 });
